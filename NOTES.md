@@ -53,4 +53,5 @@
     - Whenever mergeMap listens to all observables.
     - Whenever switchMap creates a new observable, *all* old observable(s) are deleted.
 
-    2. Why switchMap?
+    2. Why switchMap? e.g.: Well, think of <typeahead />:
+        - When we do not care at all about prior requests and simply want to throw them out.
