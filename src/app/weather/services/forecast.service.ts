@@ -1,21 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { filter, map, mergeMap, pluck, switchMap } from 'rxjs/operators';
-import OpenWeather from './interfaces/OpenWeather';
+import { filter, map, mergeMap, pluck, switchMap, toArray } from 'rxjs/operators';
+import OpenWeather from '../interfaces/OpenWeather';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ForecastService {
   private url = "https://api.openweathermap.org/data/2.5/forecast";
-
   constructor(private client: HttpClient) { }
-
-  /*
-    1.  Take the Coordinates object and map/transform it.
-    2.  Create a HttpParams object to maintain our querystring via the mapped Coordinates.
-  */
   getForecast() {
     return this.getCurrentLocation().pipe(
       map(coordinates => {
@@ -28,10 +22,16 @@ export class ForecastService {
       switchMap(params => this.client.get<OpenWeather>(this.url, { params })),
       pluck('list'),
       mergeMap(list => of(...list)),
-      filter((obj, index) => index % 8 === 0)
+      filter((obj, index) => index % 8 === 0),
+      map(weather => {
+        return {
+          dt: weather.dt_txt,
+          tmp: weather.main.temp
+        }
+      }),
+      toArray()
     );
   }
-
   getCurrentLocation(): Observable<Coordinates> {
     return new Observable<Coordinates>((observer) => {
       window.navigator.geolocation.getCurrentPosition(

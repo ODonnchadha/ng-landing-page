@@ -1,6 +1,6 @@
 export default interface OpenWeather {
     list: {
-        dt_text: string,
+        dt_txt: string,
         main: {
             temp: number;
         }

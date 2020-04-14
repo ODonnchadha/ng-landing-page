@@ -55,3 +55,8 @@
 
     2. Why switchMap? e.g.: Well, think of <typeahead />:
         - When we do not care at all about prior requests and simply want to throw them out.
+
+- Pipes:
+    - Functions that are leverged directly from a template. Used specifically to format data.
+    - Many are built-in to the Angular framework.
+    - Additionally, pipes are easy to create. They are referenced in 'export' section of the module.
