@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ForecastService } from '../forecast.service';
 
 @Component({
   selector: 'app-forecast',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./forecast.component.css']
 })
 export class ForecastComponent implements OnInit {
-
-  constructor() { }
-
+  constructor(private service: ForecastService) { 
+    this.service.getForecast().subscribe((weather) => {
+      console.log(weather);
+    });
+  }
   ngOnInit(): void {
   }
-
 }
