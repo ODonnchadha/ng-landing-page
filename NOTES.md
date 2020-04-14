@@ -69,3 +69,7 @@
     ```html
         @import 'bootstrap/dist/css/bootstrap.css';
     ```
+
+- How to wire up services in a Angular module world:
+    - Add the service to a module's providers array. (Obsolete.)
+    - Use the @injectable decorator.

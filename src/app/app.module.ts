@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NotificationModule } from './notification/notification.module';
 import { WeatherModule } from './weather/weather.module';
 
 @NgModule({
@@ -12,6 +13,7 @@ import { WeatherModule } from './weather/weather.module';
   imports: [
     BrowserModule,
     HttpClientModule,
+    NotificationModule,
     WeatherModule,
     AppRoutingModule
   ],
