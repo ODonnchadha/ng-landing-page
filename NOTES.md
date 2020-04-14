@@ -60,3 +60,12 @@
     - Functions that are leverged directly from a template. Used specifically to format data.
     - Many are built-in to the Angular framework.
     - Additionally, pipes are easy to create. They are referenced in 'export' section of the module.
+
+- Add Bootstrap to an Angular project:
+    ```javascript
+        npm install bootstrap
+    ```
+    - Import into styles.css
+    ```html
+        @import 'bootstrap/dist/css/bootstrap.css';
+    ```
