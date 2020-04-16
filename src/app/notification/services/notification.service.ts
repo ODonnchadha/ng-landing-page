@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, identity } from 'rxjs';
 import { scan } from 'rxjs/operators';
 import ICommand from '../interfaces/ICommand';
 import RandomGenerator from '../helpers/RandomGenerator';
@@ -25,19 +25,27 @@ export class NotificationService {
   }
 
   addSuccess(message: string) {
+    const id: number = RandomGenerator.Id();
     this.input.next({
       type: 'success',
-      id: RandomGenerator.Id(),
+      id,
       text: message
     });
+    setTimeout(() => {
+      this.clearMessage(id)
+    }, 5000)
   }
 
   addError(message: string) {
+    const id: number = RandomGenerator.Id();
     this.input.next({
       type: 'error',
-      id: RandomGenerator.Id(),
+      id,
       text: message
     });
+    setTimeout(() => {
+      this.clearMessage(id)
+    }, 5000)
   }
 
   clearMessage(id: number) {
