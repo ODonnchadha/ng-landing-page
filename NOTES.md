@@ -73,3 +73,21 @@
 - How to wire up services in a Angular module world:
     - Add the service to a module's providers array. (Obsolete.)
     - Use the @injectable decorator.
+
+- Introducing 'Subjects.'
+    - An obseravable and an observer mashed together.
+    - Hot by default. It will emit values even without a subscriber.
+    - The subject is multicast by default. Operators in pipe run once, regardless on number of observers.
+    - NOTE: Think the share() operator.
+    - Unicast: Operators in pipe run once for *each* observer.
+    - NOTE: Calling pipe returns a new observable that is cold and unicast.
+
+- Other RxJS 'Objects:'
+    - Async Subject: Will not emit values unitl marked as 'complete.' And only the last value is emitted.
+    - Behavior Subject: Also takes an initial 'seed' value. New subscribers instanly receive the most recent value.
+    - Replay Subject: New subscribers also instantly obtain all previously emitted values.
+
+- Notification Service:
+    - Append messages. There is persistence involved.
+    - We do not want to create a new subject. We want one subject.
+    1. The scan operator. It works like reduce, of sorts.
