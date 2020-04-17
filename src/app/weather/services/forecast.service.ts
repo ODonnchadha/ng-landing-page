@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { filter, map, mergeMap, pluck, switchMap, toArray } from 'rxjs/operators';
+import { filter, map, mergeMap, pluck, share, switchMap, toArray } from 'rxjs/operators';
 import IOpenWeather from '../interfaces/IOpenWeather';
 
 @Injectable({
@@ -29,7 +29,8 @@ export class ForecastService {
           tmp: weather.main.temp
         }
       }),
-      toArray()
+      toArray(),
+      share()
     );
   }
   getCurrentLocation(): Observable<Coordinates> {
