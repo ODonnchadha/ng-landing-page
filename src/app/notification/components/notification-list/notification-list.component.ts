@@ -14,12 +14,12 @@ export class NotificationListComponent implements OnInit {
 
   constructor(private service: NotificationService) {
     this.messages = this.service.output;
-
-    setInterval(() => {
-      this.service.addError("Goodbye Cruel World");
-    }, 500)
   }
 
   ngOnInit(): void {
+  }
+
+  onClick(id: number): void {
+    this.service.clearMessage(id);
   }
 }
