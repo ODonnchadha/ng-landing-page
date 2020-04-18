@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NewsListComponent } from './components/news-list/news-list.component';
+import { TrimOutletNamePipe } from './pipes/trim-outlet-name.pipe';
 
 @NgModule({
-  declarations: [NewsListComponent],
+  declarations: [NewsListComponent, TrimOutletNamePipe],
   imports: [
     CommonModule
   ],
