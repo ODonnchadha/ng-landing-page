@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { filter, map, mergeMap, pluck, share, switchMap, toArray } from 'rxjs/operators';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError, filter, map, mergeMap, pluck, retry, share, switchMap, tap, toArray } from 'rxjs/operators';
 import IOpenWeather from '../interfaces/IOpenWeather';
+import { NotificationService } from '../../notification/services/notification.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ForecastService {
   private url = "https://api.openweathermap.org/data/2.5/forecast";
-  constructor(private client: HttpClient) { }
+  constructor(
+    private client: HttpClient,
+    private notification: NotificationService) {
+  }
   getForecast() {
     return this.getCurrentLocation().pipe(
       map(coordinates => {
@@ -39,9 +43,18 @@ export class ForecastService {
         (position) => {
           observer.next(position.coords);
           observer.complete();
-        }, (err) => {
-          observer.error(err);
+        }, (err) => 
+          observer.error(err)
+      );
+    }).pipe(
+      retry(1),
+      tap(() => {
+        this.notification.addSuccess("Geolocation Coordinates Retrieved");
+      }),
+      catchError((err) => {
+        this.notification.addError("Geolocation Coordinates Denied");
+        return throwError(err);
       })
-    });
+    );
   }
 }

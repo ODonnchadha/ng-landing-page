@@ -2,6 +2,6 @@
     class="alert" 
     [ngClass]="message.type === 'error' ? 'alert-danger' : 'alert-success'" 
     *ngFor="let message of messages | async">
-    {{ message.text }} {{ message.id }}
+    {{ message.text }}
     <button class="close" (click)="onClick(message.id)">X</button>
 </div>
