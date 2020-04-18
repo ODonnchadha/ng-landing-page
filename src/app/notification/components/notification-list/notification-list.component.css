@@ -4,4 +4,5 @@
     bottom: 0;
     right: 10px;
     width: 333px;
+    z-index: 40;
 }
