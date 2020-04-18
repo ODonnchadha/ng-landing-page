@@ -91,3 +91,11 @@
     - Append messages. There is persistence involved.
     - We do not want to create a new subject. We want one subject.
     1. The scan operator. It works like reduce, of sorts.
+    2. The power of retry(1). We resubscribe to the observeable. So we are cold and unicast.
+        - Beware. We resubscribe an infinite number of times within a parameter.
+        - Beware. Resubmitting a form across the wire *cart blanche* may not make any sense.
+
+- News API & Hacker News API.
+    - Pagination: pageToFetch. e.g.: "It's a slow news day."
+    - Pagination is not set. API will inform us.
+    - .tap() => (1) Article List Component & (2) Pagination Component.
